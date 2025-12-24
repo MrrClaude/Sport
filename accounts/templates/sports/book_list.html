@@ -1,0 +1,107 @@
+<style>
+    body {
+        background: linear-gradient(135deg, #4c6ef5, #15aabf);
+        min-height: 100vh;
+        padding-top: 40px;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .book-card {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        transition: 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .book-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.35);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .book-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: white;
+    }
+
+    .book-info {
+        color: #e3e3e3;
+    }
+
+    .action-btn {
+        border-radius: 25px !important;
+        padding: 6px 20px !important;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .btn-edit {
+        background: #fff;
+        color: #0a6efd;
+        border: none;
+    }
+
+    .btn-delete {
+        background: #ff6b6b;
+        color: white;
+        border: none;
+    }
+
+    .btn-add {
+        background: #fff;
+        color: #0a6efd;
+        border-radius: 25px;
+        padding: 10px 25px;
+    }
+
+    .header-title {
+        color: white;
+        font-size: 2rem;
+        font-weight: 700;
+    }
+    .card{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .card2 {
+        margin-bottom: 30px;
+    }
+</style>
+
+<div class="container" style="max-width: 900px;">
+
+    <div class="d-flex justify-content-between align-items-center card2">
+        <h2 class="header-title">📚 Book Collection</h2>
+        <a href="{% url 'create_book' %}" class="btn btn-add shadow">
+            + Add Book
+        </a>
+    </div>
+
+    {% for book in books %}
+    <div class="book-card mb-3">
+        <div class="d-flex justify-content-between align-items-center card ">
+
+            <div>
+                <div class="book-title">{{ book.title }}</div>
+                <div class="book-info">Author: {{ book.author }}</div>
+                <small class="book-info ">Published: {{ book.published_date }}</small>
+            </div>
+
+            <div class="d-flex gap-5">
+                <a href="{% url 'update_book' book.id %}" class="btn action-btn btn-edit">
+                    Edit
+                </a>
+                <a href="{% url 'delete_book' book.id %}" class="btn action-btn btn-delete">
+                    Delete
+                </a>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>

@@ -1,0 +1,66 @@
+<style>
+    body {
+        background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .update-card {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        padding: 30px;
+        max-width: 500px;
+        margin: 30px auto;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .update-card h3 {
+        color: #007bff;
+        margin-bottom: 25px;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .update-card .form-control {
+        margin-bottom: 20px;
+        border-radius: 10px;
+        padding: 10px 15px;
+        font-size: 1rem;
+    }
+
+    .update-card .btn-submit {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 10px;
+        font-weight: 600;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        transition: background 0.3s ease;
+    }
+
+    .update-card .btn-submit:hover {
+        background-color: #218838;
+    }
+
+    @media (max-width: 576px) {
+        .update-card {
+            padding: 20px;
+        }
+    }
+</style>
+
+<div class="update-card">
+    <h3>Update Book</h3>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" class="form-control" name="title" value="{{ book.title }}" placeholder="Book Title" required>
+        <input type="text" class="form-control" name="author" value="{{ book.author }}" placeholder="Author Name" required>
+        <input type="date" class="form-control" name="published_date" value="{{ book.published_date|date:'Y-m-d' }}" required>
+        <button type="submit" class="btn-submit">Update Book</button>
+    </form>
+</div>

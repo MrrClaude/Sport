@@ -1,0 +1,42 @@
+{% load static %}
+
+<section id="home-section" class="hero">
+    <div class="home-slider owl-carousel">
+
+        {% for s in sliders %}
+        <div class="slider-item js-fullheight">
+            <div class="overlay"></div>
+
+            <div class="container-fluid p-0">
+                <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-end"
+                     data-scrollax-parent="true">
+
+                    <img class="one-third order-md-last img-fluid"
+                         src="{% static s.image %}" alt="slider">
+
+                    <div class="one-forth d-flex align-items-center ftco-animate"
+                         data-scrollax=" properties: { translateY: '70%' }">
+                        <div class="text">
+                            <span class="subheading">{{ s.subtitle }}</span>
+
+                            <div class="horizontal">
+                                <h1 class="mb-4 mt-3">{{ s.title }}</h1>
+                                <p class="mb-4">{{ s.description }}</p>
+
+                                <p>
+                                    <a href="{{ s.button_link }}" class="btn-custom">
+                                        {{ s.button_text }}
+                                    </a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</section>

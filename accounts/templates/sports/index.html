@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'sports/cssStyle.html' %}
+  </head>
+  <body class="goto-here">
+    
+    {% include 'sports/menu.html' %}
+
+    <!-- END nav -->
+
+
+     {% include 'sports/banner.html' %}
+
+     {% include 'sports/service.html' %}
+
+     {% include 'sports/newarrival.html' %}
+    
+     {% include 'sports/slide.html' %}
+
+
+     {% include 'sports/footer.html' %}
+    
+    
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+    {% include 'sports/js.html' %}  
+  </body>
+</html>

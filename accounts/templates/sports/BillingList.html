@@ -1,0 +1,121 @@
+{% load static %}
+  <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .billing-table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        thead {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tbody tr:hover {
+            background-color: #e9f5ff;
+        }
+
+        td img {
+            border-radius: 8px;
+            max-width: 150px;
+            height: auto;
+            display: block;
+        }
+
+        @media screen and (max-width: 768px) {
+            th, td {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            td img {
+                max-width: 100px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                display: none;
+            }
+
+            tbody tr {
+                margin-bottom: 15px;
+                border-bottom: 2px solid #ddd;
+                padding: 10px;
+            }
+
+            td {
+                padding-left: 50%;
+                position: relative;
+                text-align: left;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                width: 45%;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+
+            td img {
+                max-width: 100%;
+            }
+        }
+    </style>
+<h2>Billing List</h2>
+<table border="1">
+    <tr>
+        <th>Name</th><th>Phone</th><th>Email</th><th>Address</th><th>Total</th><th>Receipt</th>
+    </tr>
+    {% for bill in billings %}
+    <tr>
+        <td>{{ bill.first_name }} {{ bill.last_name }}</td>
+        <td>{{ bill.phone }}</td>
+        <td>{{ bill.email }}</td>
+        <td>{{ bill.address }}</td>
+        <td>{{ bill.total }}</td>
+        <td>
+            <img src="{% static bill.qr_code_image %}" width="150">
+        </td>
+    </tr>
+    {% endfor %}
+</table>

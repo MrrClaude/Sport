@@ -1,0 +1,85 @@
+<style>
+    body {
+        background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .delete-card {
+        background: #fff;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        padding: 40px 30px;
+        max-width: 450px;
+        width: 100%;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 20px;
+    }
+
+    .delete-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+    }
+
+    .delete-card h3 {
+        font-weight: 700;
+        color: #dc3545;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+    }
+
+    .delete-card p {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    .btn-danger, .btn-secondary {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 12px 0;
+        width: 100%;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .btn-secondary {
+        margin-top: 15px;
+        background-color: #6c757d;
+        color: #fff;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        color: #fff;
+    }
+
+    @media (max-width: 576px) {
+        .delete-card {
+            padding: 30px 20px;
+        }
+
+        .delete-card h3 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<div class="delete-card">
+    <h3>Are you sure?</h3>
+    <p>You are about to delete <strong>"{{ book.title }}"</strong>.<br>This action cannot be undone.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger mb-5">Yes, Delete</button>
+        <a href="{% url 'book_list' %}" class="btn btn-danger2 mb-2">Cancel</a>
+    </form>
+</div>

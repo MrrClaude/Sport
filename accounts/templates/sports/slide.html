@@ -1,0 +1,80 @@
+{% load static %}
+<section class="ftco-section ftco-deal bg-primary">
+    <div class="container">
+        <div class="row">
+
+            <!-- Main Image -->
+            <div class="col-md-6">
+                <img src="{% static deal.main_image%}" class="img-fluid" alt="{{ deal.main_product_name }}">
+            </div>
+
+            <!-- Deal Details -->
+            <div class="col-md-6">
+                <div class="heading-section heading-section-white">
+                    <span class="subheading">{{ deal.subtitle }}</span>
+                    <h2 class="mb-3">{{ deal.title }}</h2>
+                </div>
+
+                <!-- Countdown Timer -->
+                <div id="timer" class="d-flex mb-4" data-end="{{ deal.timer_end|date:'Y-m-d H:i:s' }}">
+                    <div class="time" id="days"></div>
+                    <div class="time pl-4" id="hours"></div>
+                    <div class="time pl-4" id="minutes"></div>
+                    <div class="time pl-4" id="seconds"></div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="text-deal">
+                    <h2><a href="#">{{ deal.main_product_name }}</a></h2>
+                    <p class="price">
+                        <span class="mr-2 price-dc">${{ deal.original_price }}</span>
+                        <span class="price-sale">${{ deal.sale_price }}</span>
+                    </p>
+
+                    <!-- Thumbnails -->
+                    <ul class="thumb-deal d-flex mt-4">
+                        {% for thumb in deal.thumbnail_images.all %}
+                        <li class="img" style="background-image: url('{% static thumb.image %}');"></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Countdown JS -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var timer = document.getElementById("timer");
+    if (!timer) return;
+
+    var endTimeStr = timer.getAttribute("data-end");
+    var countDownDate = new Date(endTimeStr).getTime();
+
+    var x = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("days").innerHTML = "0 Days";
+            document.getElementById("hours").innerHTML = "0 Hours";
+            document.getElementById("minutes").innerHTML = "0 Min";
+            document.getElementById("seconds").innerHTML = "0 Sec";
+            return;
+        }
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerHTML = days + " Days";
+        document.getElementById("hours").innerHTML = hours + " Hours";
+        document.getElementById("minutes").innerHTML = minutes + " Min";
+        document.getElementById("seconds").innerHTML = seconds + " Sec";
+    }, 1000);
+});
+</script>

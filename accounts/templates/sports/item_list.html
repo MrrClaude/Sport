@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item List</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .list-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .list-card h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        .actions a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .actions a.edit {
+            background-color: #17a2b8;
+        }
+
+        .actions a.edit:hover {
+            background-color: #138496;
+        }
+
+        .actions a.delete {
+            background-color: #dc3545;
+        }
+
+        .actions a.delete:hover {
+            background-color: #c82333;
+        }
+
+        .create-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #28a745;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .create-link:hover {
+            color: #218838;
+        }
+
+        @media (max-width: 576px) {
+            .list-card {
+                padding: 20px;
+            }
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .actions a {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="list-card">
+        <h1>Item List</h1>
+        <ul>
+            {% for item in items %}
+                <li>
+                    <span>{{ item.name }} - {{ item.description }}</span>
+                    <span class="actions">
+                        <a href="{% url 'update_item' item.id %}" class="edit">Edit</a>
+                        <a href="{% url 'delete_item' item.id %}" class="delete">Delete</a>
+                    </span>
+                </li>
+            {% empty %}
+                <li>No items available.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'create_item' %}" class="create-link">Create New Item</a>
+    </div>
+</body>
+</html>
