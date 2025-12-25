@@ -480,10 +480,9 @@ def billing_add(request):
     })
 
 def billing_list(request):
+    bgImage = Image.objects.get(id=2)
     billings = BillingDetail.objects.all()
-    return render(request, 'sports/BillingList.html', {'billings': billings})
-
-
+    return render(request, 'sports/BillingList.html', {'billings': billings, 'objbgimage': bgImage})
 
 
 
